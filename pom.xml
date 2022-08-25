@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jp.co.everrise.seminar</groupId>
+    <artifactId>grpcparent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>grpcparent</name>
+    <modules>
+        <module>grpccommon</module>
+        <module>grpcserver</module>
+    </modules>
+</project>
