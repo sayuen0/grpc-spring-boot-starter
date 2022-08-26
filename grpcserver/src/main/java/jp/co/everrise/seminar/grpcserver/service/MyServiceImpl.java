@@ -14,4 +14,25 @@ public class MyServiceImpl extends MyServiceGrpc.MyServiceImplBase {
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void fizzBuzz(FizzBuzzRequest request, StreamObserver<FizzBuzzReply> responseObserver) {
+        // リクエストから数値が渡ってくるので、それに対してFizzBuzzの回答を返す
+        // 3 → "fizz" 15 → "fizzBuzz" 4 → "4"
+        FizzBuzzReply reply = FizzBuzzReply.newBuilder()
+                .setAnswer("Hello: " + request.getName() + ", FizzBuzz: " + this.getFizzBuzzAnswer(request.getNumber())).build();
+        responseObserver.onNext(reply);
+        responseObserver.onCompleted();
+    }
+
+    private String getFizzBuzzAnswer(int number) {
+        if (number % 15 == 0) {
+                return "FizzBuzz";
+        }else if(number % 5 == 0) {
+                return "Buzz";
+        }else if(number % 3 == 0) {
+                return "Fizz";
+        } 
+        return String.valueOf(number);
+    }
 }
