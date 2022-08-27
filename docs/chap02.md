@@ -92,43 +92,48 @@ $ ./mvnw spring-boot:run
 
 サーバポートが`9090`番を使用していることを確認
 
-##  grpcurlでリクエストを送信するs
+##  grpcurlでリクエストを送信する
 
-grpcurl: gRPC版のカールのようなコマンド
+grpcurl: gRPC版のcurlのようなコマンド
 
-ホスト(MacOS)側でもう一つターミナルを開き、コンテナにログイン
+ホスト(MacOS)側でもう一つターミナルウィンドウを開き、コンテナにログイン
 (サーバは立ち上げたままにし、exitもしない)
 
-```
+以下、2つ目のターミナルウィンドウにて作業
+```bash
 $ cd <このリポジトリをダウンロードしたパス>/grpc-spring-boot-starter-main
 $ docker-compose exec java bash
 root@ac57d717425a:/app#
 ```
 
 grpcurlコマンドが入っているか確認
-```
+```bash
 $ grpcurl --version
 grpcurl v1.8.7
 ```
 
 サーバで提供しているサービス一覧を取得
-```
+```bash
 $ grpcurl --plaintext localhost:9090 list
 grpc.health.v1.Health
 grpc.reflection.v1alpha.ServerReflection
 jp.co.everrise.seminar.MyService
 ```
 
+MyService サービスが定義されていることが確認できる
+
 MyServiceのRPC一覧を取得
-```
+```bash
 $ grpcurl --plaintext localhost:9090 list jp.co.everrise.seminar.MyService
 jp.co.everrise.seminar.MyService.SayHello
 ```
 
+SayHello RPCが定義されていることが確認できる
+
 MyServiceのSayHelloメソッドに、リクエストを送信
 `HelloRequest`型の持つ`name`プロパティを渡す
 
-```
+```bash
 $ grpcurl --plaintext -d '{"name": "Bob"}' localhost:9090 jp.co.everrise.seminar.MyService.SayHello
 {
   "message": "Hello,Bob"

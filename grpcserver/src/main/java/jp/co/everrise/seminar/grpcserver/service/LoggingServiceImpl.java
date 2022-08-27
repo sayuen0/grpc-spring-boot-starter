@@ -1,6 +1,7 @@
 
 package jp.co.everrise.seminar.grpcserver.service;
 
+import com.google.protobuf.Empty;
 import com.google.protobuf.Timestamp;
 import io.grpc.stub.StreamObserver;
 import jp.co.everrise.seminar.proto.*;
@@ -35,6 +36,15 @@ public class LoggingServiceImpl extends LoggingServiceGrpc.LoggingServiceImplBas
     }
 
     @Override
+    public void sendLog(SendLogRequest request, StreamObserver<SendLogReply> streamObserver){
+        Log log = this.saveLog(request.getMessage());
+        SendLogReply reply = SendLogReply.newBuilder()
+                .setId(log.id).setMessage(log.message).setTimestamp(log.timestamp).build();
+        streamObserver.onNext(reply);
+        streamObserver.onCompleted();
+    }
+
+    @Override
     public void getLog(GetLogRequest request, StreamObserver<GetLogReply> streamObserver){
         Log log = this.getLog(request.getId());
         if (log == null) {
@@ -50,16 +60,22 @@ public class LoggingServiceImpl extends LoggingServiceGrpc.LoggingServiceImplBas
         streamObserver.onCompleted();
     }
 
+
+    // log引数からIDの一致するログを見つけて返す
+
     @Override
-    public void sendLog(SendLogRequest request, StreamObserver<SendLogReply> streamObserver){
-        Log log = this.saveLog(request.getMessage());
-        SendLogReply reply = SendLogReply.newBuilder()
-                .setId(log.id).setMessage(log.message).setTimestamp(log.timestamp).build();
+    public void listLog(Empty empty, StreamObserver<ListLogReply> streamObserver) {
+        ListLogReply.Builder listLogReplyBuilder = ListLogReply.newBuilder();
+        for (Log log : this.logs.values()){
+            GetLogReply logReply = GetLogReply.newBuilder()
+                    .setId(log.id).setMessage(log.message).setTimestamp(log.timestamp).build();
+            listLogReplyBuilder.addLogs(logReply);
+        }
+        ListLogReply reply = listLogReplyBuilder.build();
         streamObserver.onNext(reply);
         streamObserver.onCompleted();
     }
 
-    // log引数からIDの一致するログを見つけて返す
     private Log getLog(int id) {
         this.lock.readLock().lock();
         Log log =  this.logs.get(id);

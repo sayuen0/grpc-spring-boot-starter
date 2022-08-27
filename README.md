@@ -63,7 +63,6 @@ $ docker-compose ps
 grpc-spring-boot-starter-main_java_1   jshell    Up      0.0.0.0:9090->9090/tcp
 ```
 
-
 起動しているコンテナ内にログイン
 プロンプトの表示が変わればOK
 
@@ -72,7 +71,6 @@ $ docker-compose exec java bash
 root@ac57d717425a:/app# pwd
 /app
 ```
-
 
 ### 1. Protobufインタフェースの用意
 
@@ -91,4 +89,6 @@ root@ac57d717425a:/app# pwd
 
 [3.gRPCメソッドの追加](./docs/chap03.md)
 
-### 4. gRPCクライアントの追加
+### 4. 読み物紹介
+
+[4. 読み物紹介](./docs/chap04.md)
