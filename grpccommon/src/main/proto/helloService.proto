@@ -10,7 +10,6 @@ option java_outer_classname = "HelloWorldProto";
 service MyService {
     // Sends a greeting
     rpc SayHello (HelloRequest) returns (HelloReply) {}
-    rpc FizzBuzz (FizzBuzzRequest) returns (FizzBuzzReply) {}
 }
 
 // The request message containing the user's name.
@@ -21,13 +20,4 @@ message HelloRequest {
 // The response message containing the greetings
 message HelloReply {
     string message = 1;
-}
-
-message FizzBuzzRequest{
-    string name = 1;
-    int32 number = 2;        
-}
-
-message FizzBuzzReply{
-    string answer = 1;
 }

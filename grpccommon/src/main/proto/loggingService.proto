@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package jp.co.everrise.seminar;
+
+option java_multiple_files = true;
+option java_package = "jp.co.everrise.seminar.proto";
+option java_outer_classname="LoggingProto";
+
+service LoggingService{
+    rpc GetLog(GetLogRequest) returns (GetLogReply){}
+}
+
+message GetLogRequest{
+    int32 id = 1;
+}
+
+message GetLogReply{
+    int32 id = 1;
+    string message = 2;
+}

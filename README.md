@@ -78,15 +78,17 @@ root@ac57d717425a:/app# pwd
 
 ハンズオン
 
-[1.](./docs/chap01.md)
+[1.Protobufインタフェースの用意](./docs/chap01.md)
 
 ### 2. gRPCサーバの用意
 
 ハンズオン
 
-[2.](./docs/chap02.md)
+[2.gRPCサーバの用意](./docs/chap02.md)
 
 
 ### 3. gRPCメソッドの追加
 
-[3.](./docs/chap03.md)
+[3.gRPCメソッドの追加](./docs/chap03.md)
+
+### 4. gRPCクライアントの追加
