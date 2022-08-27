@@ -38,7 +38,7 @@ option java_outer_classname="LoggingProto";
 service LoggingService{
     rpc SendLog(SendLogRequest) returns (SendLogReply){}
     rpc GetLog(GetLogRequest) returns (GetLogReply){}
-    rpc ListLog(google.protobuf.Empty) returns (ListLogReply){}
+    rpc ListLog(google.protobuf.Empty) returns (ListLogReply){} // リクエストまたはレスポンスで送りたい値がないとき、Empty型を用いる
 }
 
 message SendLogRequest{
@@ -48,7 +48,7 @@ message SendLogRequest{
 message SendLogReply{
     int32 id = 1;
     string message = 2;
-    google.protobuf.Timestamp timestamp = 3;
+    google.protobuf.Timestamp timestamp = 3;　// Timestamp: 時刻型
 }
 
 message GetLogRequest{
@@ -62,7 +62,7 @@ message GetLogReply{
 }
 
 message ListLogReply{
-    repeated GetLogReply logs = 1;
+    repeated GetLogReply logs = 1; // repeated <Type>: Typeを要素とするリスト
 }
 ```
 
