@@ -2,12 +2,15 @@ syntax = "proto3";
 
 package jp.co.everrise.seminar;
 
+import "google/protobuf/timestamp.proto";
+
 option java_multiple_files = true;
 option java_package = "jp.co.everrise.seminar.proto";
 option java_outer_classname="LoggingProto";
 
 service LoggingService{
     rpc GetLog(GetLogRequest) returns (GetLogReply){}
+    rpc SendLog(SendLogRequest) returns (SendLogReply){}
 }
 
 message GetLogRequest{
@@ -17,4 +20,16 @@ message GetLogRequest{
 message GetLogReply{
     int32 id = 1;
     string message = 2;
+    google.protobuf.Timestamp timestamp = 3;
 }
+
+message SendLogRequest{
+    string message = 1;
+}
+
+message SendLogReply{
+    int32 id = 1;
+    string message = 2;
+    google.protobuf.Timestamp timestamp = 3;
+}
+
