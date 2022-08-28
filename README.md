@@ -88,7 +88,3 @@ root@ac57d717425a:/app# pwd
 ### 3. gRPCメソッドの追加
 
 [3.gRPCメソッドの追加](./docs/chap03.md)
-
-### 4. 読み物紹介
-
-[4. 読み物紹介](./docs/chap04.md)
